@@ -24,10 +24,10 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Route Imports
-const product = require("./routes/productRoute");
+const note = require("./routes/noteRoute");
 const user = require("./routes/userRoute");
 
-app.use("/api", product);
+app.use("/api", note);
 app.use("/api", user);
 
 // Middleware for Errors

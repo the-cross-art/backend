@@ -7,7 +7,7 @@ const {
   getNoteDetails,
   shareNote,
   searchNotes,
-} = require("../controllers/productController");
+} = require("../controllers/noteController");
 const { isAuthenticatedUser } = require("../middleware/auth");
 
 const router = express.Router();

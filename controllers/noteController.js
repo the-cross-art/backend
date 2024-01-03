@@ -1,6 +1,4 @@
-// productController.js
-
-const Product = require("../models/productModel");
+const Note = require("../models/noteModel");
 const User = require("../models/userModel");
 const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
@@ -9,7 +7,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 exports.createNote = catchAsyncErrors(async (req, res, next) => {
   req.body.user = req.user.id;
 
-  const note = await Product.create(req.body);
+  const note = await Note.create(req.body);
 
   res.status(201).json({
     success: true,
@@ -19,7 +17,7 @@ exports.createNote = catchAsyncErrors(async (req, res, next) => {
 
 // Get All Notes
 exports.getAllNotes = catchAsyncErrors(async (req, res, next) => {
-  const allNotes = await Product.find({ user: req.user.id });
+  const allNotes = await Note.find({ user: req.user.id });
 
   res.status(200).json({
     success: true,
@@ -29,7 +27,7 @@ exports.getAllNotes = catchAsyncErrors(async (req, res, next) => {
 
 // Get Note Details
 exports.getNoteDetails = catchAsyncErrors(async (req, res, next) => {
-  const note = await Product.findOne({ _id: req.params.id, user: req.user.id });
+  const note = await Note.findOne({ _id: req.params.id, user: req.user.id });
 
   if (!note) {
     return next(new ErrorHander("Note not found", 404));
@@ -43,13 +41,13 @@ exports.getNoteDetails = catchAsyncErrors(async (req, res, next) => {
 
 // Update Note
 exports.updateNote = catchAsyncErrors(async (req, res, next) => {
-  let note = await Product.findOne({ _id: req.params.id, user: req.user.id });
+  let note = await Note.findOne({ _id: req.params.id, user: req.user.id });
 
   if (!note) {
     return next(new ErrorHander("Note not found", 404));
   }
 
-  note = await Product.findOneAndUpdate({ _id: req.params.id, user: req.user.id }, req.body, {
+  note = await Note.findOneAndUpdate({ _id: req.params.id, user: req.user.id }, req.body, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
@@ -63,7 +61,7 @@ exports.updateNote = catchAsyncErrors(async (req, res, next) => {
 
 // Delete Note
 exports.deleteNote = catchAsyncErrors(async (req, res, next) => {
-  const note = await Product.findOne({ _id: req.params.id, user: req.user.id });
+  const note = await Note.findOne({ _id: req.params.id, user: req.user.id });
 
   if (!note) {
     return next(new ErrorHander("Note not found", 404));
@@ -83,7 +81,7 @@ exports.shareNote = catchAsyncErrors(async (req, res, next) => {
   const { email } = req.body;
 
   // Find the note
-  const note = await Product.findOne({ _id: id, user: req.user.id });
+  const note = await Note.findOne({ _id: id, user: req.user.id });
 
   if (!note) {
     return next(new ErrorHander("Note not found", 404));
@@ -97,7 +95,7 @@ exports.shareNote = catchAsyncErrors(async (req, res, next) => {
   }
 
   // Create a copy of the note for the userToShareWith
-  const sharedNote = new Product({
+  const sharedNote = new Note({
     notes: note.notes,
     user: userToShareWith._id,
   });
@@ -116,7 +114,7 @@ exports.searchNotes = catchAsyncErrors(async (req, res, next) => {
   const { q } = req.query;
 
   // Implement a case-insensitive text search using regular expressions
-  const searchResults = await Product.find({
+  const searchResults = await Note.find({
     user: req.user.id,
     notes: { $regex: new RegExp(q, "i") },
   });
