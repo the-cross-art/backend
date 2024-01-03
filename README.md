@@ -82,32 +82,32 @@
 
 #### Endpoints
 
-1. **GET /notes**
+1. **GET /api/notes**
    - Description: Get all notes for the authenticated user.
    - Middleware: `isAuthenticatedUser`
    - Controller: `getAllNotes`
 
-2. **POST /notes**
+2. **POST /api/notes**
    - Description: Create a new note for the authenticated user.
    - Middleware: `isAuthenticatedUser`
    - Controller: `createNote`
 
-3. **GET /notes/:id**
+3. **GET /api/notes/:id**
    - Description: Get details of a specific note for the authenticated user.
    - Middleware: `isAuthenticatedUser`
    - Controller: `getNoteDetails`
 
-4. **PUT /notes/:id**
+4. **PUT /api/notes/:id**
    - Description: Update a specific note for the authenticated user.
    - Middleware: `isAuthenticatedUser`
    - Controller: `updateNote`
 
-5. **DELETE /notes/:id**
+5. **DELETE /api/notes/:id**
    - Description: Delete a specific note for the authenticated user.
    - Middleware: `isAuthenticatedUser`
    - Controller: `deleteNote`
 
-6. **POST /notes/:id/share**
+6. **POST /api/notes/:id/share**
    - Description: Share a specific note with other users.
    - Middleware: `isAuthenticatedUser`
    - Controller: `shareNote`
@@ -121,11 +121,11 @@
 
 #### Endpoints
 
-1. **POST /auth/signup**
+1. **POST /api/auth/signup**
    - Description: Register a new user.
    - Controller: `registerUser`
 
-2. **POST /auth/login**
+2. **POST /api/auth/login**
    - Description: Log in an existing user.
    - Controller: `loginUser`
 
@@ -137,13 +137,13 @@
 ## Usage
 
 1. **Note Routes**
-   - Use the `/notes` endpoint to manage notes.
-   - Use the `/notes/:id/share` endpoint to share a note.
+   - Use the `/api/notes` endpoint to manage notes.
+   - Use the `/api/notes/:id/share` endpoint to share a note.
    - Use the `/search` endpoint to search for notes.
 
 2. **User Routes**
-   - Use the `/auth/signup` endpoint to register a new user.
-   - Use the `/auth/login` endpoint to log in as an existing user.
+   - Use the `/api/auth/signup` endpoint to register a new user.
+   - Use the `/api/auth/login` endpoint to log in as an existing user.
 
 ## User Authentication and Token Handling
 
